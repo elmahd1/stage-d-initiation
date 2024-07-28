@@ -11,35 +11,47 @@ $con = new mysqli('localhost', 'root', '', 'budget');
 $rub=$_POST["rub"];
 
 $query = $con->query("
-    SELECT 
-    MONTHNAME(created) as monthname,
-    SUM(amount) as amount,
-    MONTH(created) as monthnum
-    FROM `$rub`
-    GROUP BY monthname, monthnum
-    ORDER BY monthnum
-");
-
-$amount = [];
-foreach ($query as $data) {
     
+SELECT 'january' AS monthname, SUM(DEPENSES_JANVIER) AS amount, 1 AS monthnum FROM budget_table WHERE Rubrique = $rub
+UNION ALL
+SELECT 'February' AS monthname, SUM(DEPENSES_FEVRIER) AS amount, 2 AS monthnum FROM budget_table WHERE Rubrique = $rub
+UNION ALL
+SELECT 'March' AS monthname, SUM(DEPENSES_MARS) AS amount, 3 AS monthnum FROM budget_table WHERE Rubrique = $rub
+UNION ALL
+SELECT 'April' AS monthname, SUM(DEPENSES_AVRIL) AS amount, 4 AS monthnum FROM budget_table WHERE Rubrique = $rub
+UNION ALL
+SELECT 'May' AS monthname, SUM(DEPENSES_MAI) AS amount, 5 AS monthnum FROM budget_table WHERE Rubrique = $rub
+UNION ALL
+SELECT 'June' AS monthname, SUM(DEPENSES_JUIN) AS amount, 6 AS monthnum FROM budget_table WHERE Rubrique = $rub
+UNION ALL
+SELECT 'July' AS monthname, SUM(DEPENSES_JUILLET) AS amount, 7 AS monthnum FROM budget_table WHERE Rubrique = $rub
+UNION ALL
+SELECT 'August' AS monthname, SUM(DEPENSES_AOUT) AS amount, 8 AS monthnum FROM budget_table WHERE Rubrique = $rub
+UNION ALL
+SELECT 'September' AS monthname, SUM(DEPENSES_SEPTEMBRE) AS amount, 9 AS monthnum FROM budget_table WHERE Rubrique = $rub
+UNION ALL
+SELECT 'October' AS monthname, SUM(DEPENSES_OCTOBRE) AS amount, 10 AS monthnum FROM budget_table WHERE Rubrique = $rub
+UNION ALL
+SELECT 'November' AS monthname, SUM(DEPENSES_NOVEMBRE) AS amount, 11 AS monthnum FROM budget_table WHERE Rubrique = $rub
+UNION ALL
+SELECT 'December' AS monthname, SUM(DEPENSES_DECEMBRE) AS amount, 12 AS monthnum FROM budget_table WHERE Rubrique = $rub
+ORDER BY monthnum;
+
+");
+$s="SELECT DOTATION_2024 FROM budget_table where Rubrique=$rub";
+$result=$con->query($s);
+$row = $result->fetch_assoc();
+$dot = $row['DOTATION_2024'];
+$amount = [];
+$amount2=[];
+foreach ($query as $data) {
+   
     $amount[] = $data['amount'];
 }
-$query2 = $con->query("
-    SELECT 
-    MONTHNAME(created) as monthname,
-    SUM(amount) as amount,
-    MONTH(created) as monthnum
-    FROM `RESTE$rub`
-    GROUP BY monthname, monthnum
-    ORDER BY monthnum
-");
+$amount2 = [$dot - $amount[0] ,$dot - $amount[0] - $amount[1] , $dot - $amount[0]- $amount[1]- $amount[2] , $dot - $amount[0]- $amount[1]- $amount[2]- $amount[3] ,$dot - $amount[0]- $amount[1]- $amount[2]- $amount[3]- $amount[4] ,$dot - $amount[0]- $amount[1]- $amount[2]- $amount[3]- $amount[4]- $amount[5] , $dot - $amount[0]- $amount[1]- $amount[2]- $amount[3]- $amount[4]- $amount[5]- $amount[6] ,  $dot - $amount[0]- $amount[1]- $amount[2]- $amount[3]- $amount[4]- $amount[5]- $amount[6]- $amount[7] , $dot - $amount[0]- $amount[1]- $amount[2]- $amount[3]- $amount[4]- $amount[5]- $amount[6]- $amount[7]- $amount[8], $dot - $amount[0]- $amount[1]- $amount[2]- $amount[3]- $amount[4]- $amount[5]- $amount[6]- $amount[7]- $amount[8]- $amount[9],$dot - $amount[0]- $amount[1]- $amount[2]- $amount[3]- $amount[4]- $amount[5]- $amount[6]- $amount[7]- $amount[8]- $amount[9]- $amount[10], $dot - $amount[0]- $amount[1]- $amount[2]- $amount[3]- $amount[4]- $amount[5]- $amount[6]- $amount[7]- $amount[8]- $amount[9]- $amount[10]-$amount[11]];
 
-$amount2 = [];
-foreach ($query2 as $data2) {
-   
-    $amount2[] = $data2['amount'];
-}
+
+
 
 ?>
 
