@@ -29,7 +29,57 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $depenses_decembre[$index] = $_POST['d12'][$index];
         $total_depenses[$index]=$depenses_janvier[$index] + $depenses_fevrier[$index] +$depenses_mars[$index] +$depenses_avril[$index]+$depenses_mai[$index]+$depenses_juin[$index]+$depenses_juillet[$index]+$depenses_aout[$index]+$depenses_septembre[$index]+$depenses_octobre[$index]+$depenses_novembre[$index]+$depenses_decembre[$index];
         $reliquat[$index] =  $dotation_2024[$index]- $total_depenses[$index];
-if($depenses_janvier>0){}
+        function email ($dot,$rm,$r){
+$m=$dot/12;
+$mr=$r/$rm;
+if($mr<$m){
+  $to = "elmehdielmhadri@gmail.com";
+$subject = "alert";
+$message = "bonjour, le reste de la dotation nest pas sufisant pour le reste des mois.";
+$headers = "From: elmhadrielmahdi@gmail.com";
+
+if (mail($to, $subject, $message, $headers)) {
+    echo "Email sent successfully.";
+} else {
+    echo "Email sending failed.";
+}
+}
+        }
+if($depenses_janvier[$index] && !$depenses_fevrier[$index] && !$depenses_mars[$index] && !$depenses_avril[$index] && !$depenses_mai[$index] &&  !$depenses_juin[$index] &&  !$depenses_juillet[$index] &&  !$depenses_aout[$index] &&  !$depenses_septembre[$index] &&  !$depenses_octobre[$index] &&  !$depenses_novembre[$index] &&  !$depenses_decembre[$index] ){
+email( $dotation_2024[$index],11,$reliquat[$index]);
+}
+if($depenses_janvier[$index] && $depenses_fevrier[$index] && !$depenses_mars[$index] && !$depenses_avril[$index] && !$depenses_mai[$index] &&  !$depenses_juin[$index] &&  !$depenses_juillet[$index] &&  !$depenses_aout[$index] &&  !$depenses_septembre[$index] &&  !$depenses_octobre[$index] &&  !$depenses_novembre[$index] &&  !$depenses_decembre[$index] ){
+  email( $dotation_2024[$index],10,$reliquat[$index]); 
+}
+if($depenses_janvier[$index] && $depenses_fevrier[$index] && $depenses_mars[$index] && !$depenses_avril[$index] && !$depenses_mai[$index] &&  !$depenses_juin[$index] &&  !$depenses_juillet[$index] &&  !$depenses_aout[$index] &&  !$depenses_septembre[$index] &&  !$depenses_octobre[$index] &&  !$depenses_novembre[$index] &&  !$depenses_decembre[$index] ){
+  email( $dotation_2024[$index],9,$reliquat[$index]);
+}
+
+if($depenses_janvier[$index] && $depenses_fevrier[$index] && $depenses_mars[$index] && $depenses_avril[$index] && !$depenses_mai[$index] &&  !$depenses_juin[$index] &&  !$depenses_juillet[$index] &&  !$depenses_aout[$index] &&  !$depenses_septembre[$index] &&  !$depenses_octobre[$index] &&  !$depenses_novembre[$index] &&  !$depenses_decembre[$index] ){
+  email( $dotation_2024[$index],8,$reliquat[$index]);
+}
+if($depenses_janvier[$index] && $depenses_fevrier[$index] && $depenses_mars[$index] && $depenses_avril[$index] && $depenses_mai[$index] &&  !$depenses_juin[$index] &&  !$depenses_juillet[$index] &&  !$depenses_aout[$index] &&  !$depenses_septembre[$index] &&  !$depenses_octobre[$index] &&  !$depenses_novembre[$index] &&  !$depenses_decembre[$index] ){
+  email( $dotation_2024[$index],7,$reliquat[$index]);
+}
+if($depenses_janvier[$index] && $depenses_fevrier[$index] && $depenses_mars[$index] && $depenses_avril[$index] && $depenses_mai[$index] &&  $depenses_juin[$index] &&  !$depenses_juillet[$index] &&  !$depenses_aout[$index] &&  !$depenses_septembre[$index] &&  !$depenses_octobre[$index] &&  !$depenses_novembre[$index] &&  !$depenses_decembre[$index] ){
+  email( $dotation_2024[$index],6,$reliquat[$index]);
+}
+if($depenses_janvier[$index] && $depenses_fevrier[$index] && $depenses_mars[$index] && $depenses_avril[$index] && $depenses_mai[$index] &&  $depenses_juin[$index] &&  $depenses_juillet[$index] &&  !$depenses_aout[$index] &&  !$depenses_septembre[$index] &&  !$depenses_octobre[$index] &&  !$depenses_novembre[$index] &&  !$depenses_decembre[$index] ){
+  email( $dotation_2024[$index],5,$reliquat[$index]);
+}
+if($depenses_janvier[$index] && $depenses_fevrier[$index] && $depenses_mars[$index] && $depenses_avril[$index] && $depenses_mai[$index] &&  $depenses_juin[$index] &&  $depenses_juillet[$index] &&  $depenses_aout[$index] &&  !$depenses_septembre[$index] &&  !$depenses_octobre[$index] &&  !$depenses_novembre[$index] &&  !$depenses_decembre[$index] ){
+  email( $dotation_2024[$index],4,$reliquat[$index]);
+}
+if($depenses_janvier[$index] && $depenses_fevrier[$index] && $depenses_mars[$index] && $depenses_avril[$index] && $depenses_mai[$index] &&  $depenses_juin[$index] &&  $depenses_juillet[$index] &&  $depenses_aout[$index] &&  $depenses_septembre[$index] &&  !$depenses_octobre[$index] &&  !$depenses_novembre[$index] &&  !$depenses_decembre[$index] ){
+  email( $dotation_2024[$index],3,$reliquat[$index]);
+}
+if($depenses_janvier[$index] && $depenses_fevrier[$index] && $depenses_mars[$index] && $depenses_avril[$index] && $depenses_mai[$index] &&  $depenses_juin[$index] &&  $depenses_juillet[$index] &&  $depenses_aout[$index] &&  $depenses_septembre[$index] &&  $depenses_octobre[$index] &&  !$depenses_novembre[$index] &&  !$depenses_decembre[$index] ){
+  email( $dotation_2024[$index],2,$reliquat[$index]);
+}
+if($depenses_janvier[$index] && $depenses_fevrier[$index] && $depenses_mars[$index] && $depenses_avril[$index] && $depenses_mai[$index] &&  $depenses_juin[$index] &&  $depenses_juillet[$index] &&  $depenses_aout[$index] &&  $depenses_septembre[$index] &&  $depenses_octobre[$index] &&  $depenses_novembre[$index] &&  !$depenses_decembre[$index] ){
+  email( $dotation_2024[$index],1,$reliquat[$index]);
+}
+
          $sql=" UPDATE `budget_table`
           SET `DOTATION_2024`=' $dotation_2024[$index]',
           `RALLONGE`=' $rallonge[$index]',
@@ -48,21 +98,10 @@ if($depenses_janvier>0){}
           `TOTAL_DEPENSES`='$total_depenses[$index]',
           `RELIQUAT`='$reliquat[$index]' WHERE id='$id'
           
-          SET `amount`='$depenses_janvier[$index]' WHERE id='1',
-          SET `amount`='$depenses_fevrier[$index]' WHERE id='2',
-          SET `amount`='$depenses_mars[$index]' WHERE id='3',
-          SET `amount`='$depenses_avril[$index]' WHERE id='4',
-          SET `amount`='$depenses_mai[$index]' WHERE id='5',
-          SET `amount`='$depenses_juin[$index]' WHERE id='6',
-          SET `amount`='$depenses_juillet[$index]' WHERE id='7',
-          SET `amount`='$depenses_aout[$index]' WHERE id='8',
-          SET `amount`='$depenses_septembre[$index]' WHERE id='9',
-          SET `amount`='$depenses_octobre[$index]' WHERE id='10',
-          SET `amount`='$depenses_novembre[$index]' WHERE id='11',
-          SET `amount`='$depenses_decembre[$index]' WHERE id='12',";
+         ";
           
           if($conn->query($sql) === TRUE){
-            echo "done: $id";
+            header('Location: index.html');
           }
           else{
             echo"erreur";
